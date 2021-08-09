@@ -1,9 +1,10 @@
 name: Cleanup Docker registry
 on:
-  schedule:
-    - cron:  '0 6 * * *'
-  repository_dispatch:
-    types: [cleanup]
+  #  schedule:
+  #    - cron:  '0 6 * * *'
+  #  repository_dispatch:
+  #    types: [cleanup]
+  push
 
 env:
   WERF_ENV: "production"
@@ -25,3 +26,5 @@ jobs:
         uses: werf/actions/cleanup@v1.2
         env:
           WERF_LOG_VERBOSE: "on"
+          WERF_REPO_GITHUB_TOKEN: ${{ secrets.REGISTRY_CLEANUP_TOKEN }}
+
